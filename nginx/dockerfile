@@ -1,0 +1,46 @@
+FROM alpine:latest
+LABEL maintainer="amoussai"
+
+ENV SERVERNAME 10.12.9.14
+
+ENV COUNTRY MA
+ENV STATE Khouribga
+ENV LOCALITY Khouribga
+ENV ORGANIZATION 1337FIL
+
+RUN apk update ; \
+	apk upgrade ; \
+	apk add nginx ; \
+	apk add php-fpm ; \
+	apk add php-mysql ; \
+	apk add php-curl ; \
+	apk add php-gd ; \
+	apk add php-intl ; \
+	apk add php-mbstring ; \
+	apk add php-soap ; \
+	apk add php-xml ; \
+	apk add php-xmlrpc ; \
+	apk add php-zip ; \
+	apk add php-pear ; \
+	apk add php-gettext ; \
+	apk add php-cgi
+
+
+ADD ./srcs/script.sh /usr/bin/script.sh
+ADD ./srcs/listener.sh /usr/bin/listener.sh 
+RUN mkdir -p /run/nginx
+
+COPY ./srcs/default.conf /etc/nginx/conf.d/
+COPY ./srcs/nginx.conf /etc/nginx/nginx.conf
+
+RUN chmod 755 /usr/bin/script.sh
+RUN chmod 755 /usr/bin/listener.sh
+
+RUN sh /usr/bin/script.sh
+
+VOLUME [ "/sys/fs/cgroup" ]
+VOLUME ["/etc/nginx/conf.d", "/var/log/nginx", "/www"]
+
+EXPOSE 80 443
+
+ENTRYPOINT ["sh", "/usr/bin/listener.sh"]
