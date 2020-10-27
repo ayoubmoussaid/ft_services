@@ -1,0 +1,31 @@
+FROM alpine
+
+LABEL key="amoussai"
+
+ENV SERVERNAME 192.168.99.105
+
+ENV COUNTRY MA
+ENV STATE Khouribga
+ENV LOCALITY Khouribga
+ENV ORGANIZATION 1337FIL
+
+RUN apk update && \
+    apk add vsftpd && \
+    apk add openrc && \
+    rc-update add vsftpd default && \
+    openrc default && \
+    rc-service vsftpd restart && \
+    apk add openssl && \
+    openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem -subj "/C=$COUNTRY/ST=$STATE/L=$LOCALITY/O=$ORGANIZATION/CN=$SERVERNAME" && \
+    adduser ftpuser -D && \
+    echo "ftpuser:password" | chpasswd && \
+    chown root:root /home/ftpuser && \
+    mkdir /home/ftpuser/files && \
+    chown ftpuser:ftpuser /home/ftpuser/files 
+
+COPY ./srcs/vsftpd.conf /etc/vsftpd/
+
+
+EXPOSE 21 21100
+
+CMD ["sh"]

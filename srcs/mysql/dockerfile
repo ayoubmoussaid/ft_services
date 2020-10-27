@@ -1,0 +1,30 @@
+FROM alpine
+
+LABEL key="amoussai"
+
+RUN apk update && \
+    apk add openrc && \
+    apk add mysql mysql-client
+
+COPY ./srcs/my.cnf /etc/mysql/
+COPY ./srcs/phpmyadmin.sql /
+
+    
+RUN mkdir /run/openrc && \
+    touch /run/openrc/softlevel && \
+    mkdir /app && \
+    mkdir /app/mysql && \
+    /etc/init.d/mariadb setup && \
+    echo "hello there **********************************" && \
+    openrc default && \
+    /etc/init.d/mariadb start && \
+    mysql -u root -e "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY 'password'; FLUSH PRIVILEGES;" && \
+    mysql -u root -e "CREATE DATABASE phpmyadmin;" && \
+    mysql < /phpmyadmin.sql -u root && \
+    mysql -u root -e "create database wordpress"
+
+EXPOSE 3306
+
+CMD [ "sh" ]
+
+

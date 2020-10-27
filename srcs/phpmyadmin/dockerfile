@@ -1,0 +1,35 @@
+FROM alpine
+
+LABEL key="amoussai"
+
+RUN apk update && \
+    apk add nginx && \
+    apk add openrc && \
+    apk add vim && \
+    openrc default && \
+    adduser -D -g 'www' www && \
+    mkdir /var/www/test && \
+    chown -R www:www /var/lib/nginx && \
+    chown -R www:www /var/www/test && \
+    mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig && \
+    apk add php-session php-mbstring php7-common php7-iconv php7-json php7-gd php7-curl php7-zlib php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap php7-ctype php7-dom && \
+    apk add php-mysqli && \
+    apk add php7 php7-fpm php7-opcache && \
+    wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz -P /var/www/test && \
+    tar zxvf /var/www/test/phpMyAdmin-4.9.7-all-languages.tar.gz -C var/www/test/ && \
+    rm /var/www/test/phpMyAdmin-4.9.7-all-languages.tar.gz && \
+    mv /var/www/test/phpMyAdmin-4.9.7-all-languages /var/www/test/phpmyadmin && \
+    chmod -R 777 /var/www/test && \
+    chmod -R 777 /var/www/test/phpmyadmin && \
+    ln -s /var/www/test/phpmyadmin  /var/www/localhost/htdocs/phpmyadmin && \
+    rc-update add nginx default && \
+    rc-update add php-fpm7 default
+
+COPY ./srcs/nginx.conf /etc/nginx/
+COPY ./srcs/config.inc.php /var/www/test/phpmyadmin
+
+EXPOSE 5000
+
+CMD [ "sh" ]
+
+
