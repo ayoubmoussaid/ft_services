@@ -1,0 +1,10 @@
+FROM alpine
+
+LABEL key="amoussai"
+
+RUN apk update && apk add influxdb && apk add openrc
+
+EXPOSE 8086
+
+CMD [ "sh" ]
+
