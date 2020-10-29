@@ -24,8 +24,10 @@ RUN apk update && \
     chown ftpuser:ftpuser /home/ftpuser/files 
 
 COPY ./srcs/vsftpd.conf /etc/vsftpd/
+COPY ./srcs/startup.sh /bin/
 
+RUN chmod 755 /bin/startup.sh
 
 EXPOSE 21 21100
 
-CMD ["sh"]
+CMD ["startup.sh"]

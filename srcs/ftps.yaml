@@ -1,0 +1,48 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: ftps
+spec:
+  selector:
+    matchLabels:
+      app: ftps
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      containers:
+      - name: ftps
+        imagePullPolicy: Never
+        image: ftps:mine
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+        ports:
+        -   name: ftps
+            containerPort: 21
+            hostPort: 21
+        -   name: ftps-send
+            containerPort: 21100
+            hostPort: 21100
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: ftps
+    labels:
+        tier: ftps
+spec:
+    type: LoadBalancer
+    selector:
+        app: ft_services
+        tier: ftps
+    ports:
+        -   targetPort: 21
+            port: 21
+            name: ftps
+        -   targetPort: 21100
+            port: 21100
+            name: ftps-send

@@ -1,7 +1,7 @@
 FROM alpine:latest
 LABEL maintainer="amoussai"
 
-ENV SERVERNAME 10.12.9.14
+ENV SERVERNAME 192.168.99.105
 
 ENV COUNTRY MA
 ENV STATE Khouribga
@@ -13,7 +13,6 @@ RUN apk update ; \
 	apk add nginx ; \
 	apk add openrc ; \
 	apk add php-fpm ; \
-	apk add php-mysql ; \
 	apk add php-curl ; \
 	apk add php-gd ; \
 	apk add php-intl ; \
@@ -24,24 +23,27 @@ RUN apk update ; \
 	apk add php-zip ; \
 	apk add php-pear ; \
 	apk add php-gettext ; \
-	apk add php-cgi
+	apk add php-cgi ; \
+	apk add vim ; \
+	apk add openssh 
+
 
 
 ADD ./srcs/script.sh /usr/bin/script.sh
 ADD ./srcs/listener.sh /usr/bin/listener.sh 
-RUN mkdir -p /run/nginx
+RUN mkdir -p /run/nginx && mkdir /www
 
+RUN openrc default && rc-update add sshd && /etc/init.d/sshd start
 
+COPY ./srcs/index.html /www
 COPY ./srcs/default.conf /etc/nginx/conf.d/
+COPY ./srcs/sshd_config /etc/ssh/
 
 RUN chmod 755 /usr/bin/script.sh
 RUN chmod 755 /usr/bin/listener.sh
 
 RUN sh /usr/bin/script.sh
 
-VOLUME [ "/sys/fs/cgroup" ]
-VOLUME ["/etc/nginx/conf.d", "/var/log/nginx", "/www"]
-
-EXPOSE 80 443
+EXPOSE 80 443 600
 
 ENTRYPOINT ["sh", "/usr/bin/listener.sh"]
