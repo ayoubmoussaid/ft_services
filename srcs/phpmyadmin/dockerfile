@@ -28,8 +28,11 @@ RUN apk update && \
 COPY ./srcs/nginx.conf /etc/nginx/
 COPY ./srcs/config.inc.php /var/www/test/phpmyadmin
 
+COPY ./srcs/startup.sh /bin/
+
+RUN chmod 755 /bin/startup.sh
+
 EXPOSE 5000
 
-CMD [ "sh" ]
-
+CMD ["startup.sh"]
 

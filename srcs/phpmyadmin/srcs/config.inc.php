@@ -31,7 +31,7 @@ $cfg['Servers'][$i]['auth_type'] = 'config';
 $cfg['Servers'][$i]['user'] = 'root';
 $cfg['Servers'][$i]['password'] = 'password';
 /* Server parameters */
-$cfg['Servers'][$i]['host'] = '192.168.99.105';
+$cfg['Servers'][$i]['host'] = '192.168.99.104';
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
 

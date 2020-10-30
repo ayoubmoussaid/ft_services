@@ -1,7 +1,7 @@
 FROM alpine:latest
 LABEL maintainer="amoussai"
 
-ENV SERVERNAME 192.168.99.105
+ENV SERVERNAME 192.168.99.104
 
 ENV COUNTRY MA
 ENV STATE Khouribga

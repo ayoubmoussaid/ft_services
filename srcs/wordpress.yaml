@@ -1,0 +1,42 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - name: wordpress
+        imagePullPolicy: Never
+        image: wordpress:mine
+        resources:
+          limits:
+            memory: 200Mi
+            cpu: "100m"
+        ports:
+        -   name: wordpress
+            containerPort: 5050
+            hostPort: 5050
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: wordpress
+    labels:
+        tier: wordpress
+spec:
+    type: LoadBalancer
+    selector:
+        app: ft_services
+        tier: wordpress
+    ports:
+        -   targetPort: 5050
+            port: 5050
+            name: wordpress

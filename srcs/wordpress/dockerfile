@@ -25,13 +25,17 @@ RUN apk update && \
     rc-update add php-fpm7 default
 
 COPY ./srcs/nginx.conf /etc/nginx/
-COPY ./srcs/wp-config.php /var/www/test/wordpress
+COPY ./srcs/wp-config.php /var/www/test/wordpress/wp-config.php
 COPY ./srcs/wp-config2.php /
 
 RUN wget https://api.wordpress.org/secret-key/1.1/salt/ && \
     cat /index.htm* >> /var/www/test/wordpress/wp-config.php && \
     cat /wp-config2.php >> /var/www/test/wordpress/wp-config.php
 
+COPY ./srcs/startup.sh /bin/
+
+RUN chmod 755 /bin/startup.sh
+
 EXPOSE 5050
 
-CMD [ "sh" ]
+CMD ["startup.sh"]

@@ -23,8 +23,12 @@ RUN mkdir /run/openrc && \
     mysql < /phpmyadmin.sql -u root && \
     mysql -u root -e "create database wordpress"
 
+COPY ./srcs/startup.sh /bin/
+
+RUN chmod 755 /bin/startup.sh
+
 EXPOSE 3306
 
-CMD [ "sh" ]
+CMD ["startup.sh"]
 
 

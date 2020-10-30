@@ -2,10 +2,10 @@
 
 openrc default
 
-rc-service vsftpd restart
+rc-service mariadb restart
 
 while sleep 60; do
-  pgrep vsftpd
+  pgrep mariadb
   PROCESS_STATUS=$?
   if [ $PROCESS_STATUS -ne 0 ]; then
     echo "A process has been stopped or exited."

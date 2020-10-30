@@ -1,0 +1,42 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        imagePullPolicy: Never
+        image: mysql:mine
+        resources:
+          limits:
+            memory: 200Mi
+            cpu: "100m"
+        ports:
+        -   name: mysql
+            containerPort: 3306
+            hostPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: mysql
+    labels:
+        tier: mysql
+spec:
+    type: LoadBalancer
+    selector:
+        app: ft_services
+        tier: mysql
+    ports:
+        -   targetPort: 3306
+            port: 3306
+            name: mysql
