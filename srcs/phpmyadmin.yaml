@@ -16,6 +16,13 @@ spec:
       - name: phpmyadmin
         imagePullPolicy: Never
         image: phpmyadmin:mine
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - /verif.sh
+          initialDelaySeconds: 15
+          periodSeconds: 5
         resources:
           limits:
             memory: 200Mi
@@ -28,6 +35,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+    annotations:
+      metallb.universe.tf/allow-shared-ip: shared
     name: phpmyadmin
     labels:
         tier: phpmyadmin

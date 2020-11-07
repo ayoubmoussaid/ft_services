@@ -29,8 +29,10 @@ COPY ./srcs/nginx.conf /etc/nginx/
 COPY ./srcs/config.inc.php /var/www/test/phpmyadmin
 
 COPY ./srcs/startup.sh /bin/
+COPY /srcs/verif.sh /
 
-RUN chmod 755 /bin/startup.sh
+RUN chmod 755 /bin/startup.sh && \
+    chmod 777 /verif.sh
 
 EXPOSE 5000
 

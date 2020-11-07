@@ -1,26 +1,26 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: mysql
+  name: influxdb
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: influxdb
   replicas: 1
   template:
     metadata:
       labels:
-        app: mysql
+        app: influxdb
     spec:
       containers:
-      - name: mysql
+      - name: influxdb
         imagePullPolicy: Never
-        image: mysql:mine
+        image: influxdb:mine
         livenessProbe:
           exec:
             command:
             - pgrep
-            - mysqld
+            - influxd
           initialDelaySeconds: 5
           periodSeconds: 5
         resources:
@@ -28,26 +28,26 @@ spec:
             memory: 200Mi
             cpu: "100m"
         ports:
-        -   name: mysql
-            containerPort: 3306
-            hostPort: 3306
+        -   name: influxdb
+            containerPort: 8086
+            hostPort: 8086
         volumeMounts:
-        - name: mysql-persistent-storage
+        - name: influxdb-persistent-storage
           mountPath: /var/lib/mysql
       volumes:
-      - name: mysql-persistent-storage
+      - name: influxdb-persistent-storage
         persistentVolumeClaim:
-          claimName: mysql-pvc
+          claimName: influxdb-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pvc
+  name: influxdb-pvc
   labels:
-    app: mysql
+    app: influxdb
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
@@ -57,15 +57,15 @@ kind: Service
 metadata:
     annotations:
       metallb.universe.tf/allow-shared-ip: shared
-    name: mysql
+    name: influxdb
     labels:
-        tier: mysql
+        tier: influxdb
 spec:
     type: ClusterIP
     selector:
         app: ft_services
-        tier: mysql
+        tier: influxdb
     ports:
-        -   targetPort: 3306
-            port: 3306
-            name: mysql
+        -   targetPort: 8086
+            port: 8086
+            name: influxdb

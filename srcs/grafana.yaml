@@ -1,26 +1,26 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: ftps
+  name: grafana
 spec:
   selector:
     matchLabels:
-      app: ftps
+      app: grafana
   replicas: 1
   template:
     metadata:
       labels:
-        app: ftps
+        app: grafana
     spec:
       containers:
-      - name: ftps
+      - name: grafana
         imagePullPolicy: Never
-        image: ftps:mine
+        image: grafana:mine
         livenessProbe:
           exec:
             command:
             - pgrep
-            - vsftpd
+            - grafana
           initialDelaySeconds: 5
           periodSeconds: 5
         resources:
@@ -28,30 +28,24 @@ spec:
             memory: 200Mi
             cpu: "100m"
         ports:
-        -   name: ftps
-            containerPort: 21
-            hostPort: 21
-        -   name: ftps-send
-            containerPort: 21100
-            hostPort: 21100
+        -   name: grafana
+            containerPort: 3000
+            hostPort: 3000
 ---
 apiVersion: v1
 kind: Service
 metadata:
     annotations:
       metallb.universe.tf/allow-shared-ip: shared
-    name: ftps
+    name: grafana
     labels:
-        tier: ftps
+        tier: grafana
 spec:
     type: LoadBalancer
     selector:
         app: ft_services
-        tier: ftps
+        tier: grafana
     ports:
-        -   targetPort: 21
-            port: 21
-            name: ftps
-        -   targetPort: 21100
-            port: 21100
-            name: ftps-send
+        -   targetPort: 3000
+            port: 3000
+            name: grafana

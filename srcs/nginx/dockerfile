@@ -38,11 +38,17 @@ RUN openrc default && rc-update add sshd && /etc/init.d/sshd start
 COPY ./srcs/index.html /www
 COPY ./srcs/default.conf /etc/nginx/conf.d/
 COPY ./srcs/sshd_config /etc/ssh/
+COPY /srcs/verif.sh /
 
-RUN chmod 755 /usr/bin/script.sh
-RUN chmod 755 /usr/bin/listener.sh
+RUN chmod 755 /usr/bin/script.sh && \
+	chmod 755 /usr/bin/listener.sh && \
+	adduser sshuser -D && \
+    echo "sshuser:password" | chpasswd && \
+	chmod 777 verif.sh
+
 
 RUN sh /usr/bin/script.sh
+
 
 EXPOSE 80 443 600
 

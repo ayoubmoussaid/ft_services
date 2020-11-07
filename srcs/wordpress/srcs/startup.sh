@@ -11,9 +11,11 @@ while sleep 60; do
   PROCESS_STATUS=$?
   pgrep nginx
   PROCESS_1_STATUS=$?
-  if [ $PROCESS_STATUS -ne 0 -o $PROCESS_1_STATUS -ne 0 ]; then
-    echo "A process has been stopped or exited."
-    exit 1
+  if [ $PROCESS_STATUS -ne 0 ]; then
+    rc-service php-fpm7 restart
+  fi
+  if [ $PROCESS_1_STATUS -ne 0 ]; then
+    rc-service nginx restart
   fi
 done
 

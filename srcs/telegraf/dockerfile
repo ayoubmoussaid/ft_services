@@ -1,0 +1,20 @@
+FROM alpine
+
+LABEL key="amoussai"
+
+RUN apk update && \
+    apk add openrc && \
+    apk add vim && \
+    wget https://dl.influxdata.com/telegraf/releases/telegraf-1.16.1_linux_amd64.tar.gz && \
+    tar xf telegraf-1.16.1_linux_amd64.tar.gz &&\
+    rm telegraf-1.16.1_linux_amd64.tar.gz && \
+    mv telegraf* telegraf 
+
+COPY ./srcs/startup.sh /bin/
+
+RUN chmod 755 /bin/startup.sh
+
+EXPOSE 3000
+
+CMD ["startup.sh"]
+

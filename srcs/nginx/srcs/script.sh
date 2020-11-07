@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 adduser -D -g 'www' www
 

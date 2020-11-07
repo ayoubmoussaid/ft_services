@@ -32,3 +32,6 @@
 
 -> activated ipvs with Kubectl and installed metalLB load balancer
     check MetalLB website
+
+
+    kubectl exec --stdin --tty mysql-8b86ffffb-4z2gp -- /bin/sh
