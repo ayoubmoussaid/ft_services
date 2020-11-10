@@ -30,10 +30,12 @@ COPY ./srcs/wp-config2.php /
 
 RUN wget https://api.wordpress.org/secret-key/1.1/salt/ && \
     cat /index.htm* >> /var/www/test/wordpress/wp-config.php && \
-    cat /wp-config2.php >> /var/www/test/wordpress/wp-config.php
+    cat /wp-config2.php >> /var/www/test/wordpress/wp-config.php && \
+    apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 COPY ./srcs/startup.sh /bin/
 COPY /srcs/verif.sh /
+COPY ./srcs/telegraf.conf ./etc/
 
 RUN chmod 755 /bin/startup.sh && \
     chmod 777 /verif.sh

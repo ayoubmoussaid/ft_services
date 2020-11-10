@@ -21,10 +21,12 @@ RUN apk update && \
     echo "ftpuser:password" | chpasswd && \
     chown root:root /home/ftpuser && \
     mkdir /home/ftpuser/files && \
-    chown ftpuser:ftpuser /home/ftpuser/files 
+    chown ftpuser:ftpuser /home/ftpuser/files && \
+    apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 COPY ./srcs/vsftpd.conf /etc/vsftpd/
 COPY ./srcs/startup.sh /bin/
+COPY ./srcs/telegraf.conf ./etc/
 
 RUN chmod 755 /bin/startup.sh
 

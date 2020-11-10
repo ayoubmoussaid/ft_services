@@ -8,11 +8,17 @@ RUN apk update && \
     wget https://dl.grafana.com/oss/release/grafana-7.3.1.linux-amd64.tar.gz && \
     tar -zxvf grafana-7.3.1.linux-amd64.tar.gz && \
     mv grafana-7.3.1 grafana && \
+    apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing && \
     apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main libc6-compat && \
-    cp /grafana/conf/sample.ini /grafana/conf/custom.ini
+    cp /grafana/conf/sample.ini /grafana/conf/custom.ini && \
+    mkdir /var/lib/grafana/ && \
+    mkdir /var/lib/grafana/dashboards/
 
 COPY ./srcs/datasource.yaml /grafana/conf/provisioning/datasources/
 COPY ./srcs/startup.sh /bin/
+COPY ./srcs/telegraf.conf ./etc/
+COPY ./srcs/dashboards/* /var/lib/grafana/dashboards/
+COPY ./srcs/dashboard.yaml /grafana/conf/provisioning/dashboards
 
 RUN chmod 755 /bin/startup.sh
 

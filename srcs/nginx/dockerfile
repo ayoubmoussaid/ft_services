@@ -25,7 +25,8 @@ RUN apk update ; \
 	apk add php-gettext ; \
 	apk add php-cgi ; \
 	apk add vim ; \
-	apk add openssh 
+	apk add openssh ; \
+	apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 
 
@@ -39,6 +40,7 @@ COPY ./srcs/index.html /www
 COPY ./srcs/default.conf /etc/nginx/conf.d/
 COPY ./srcs/sshd_config /etc/ssh/
 COPY /srcs/verif.sh /
+COPY ./srcs/telegraf.conf ./etc/
 
 RUN chmod 755 /usr/bin/script.sh && \
 	chmod 755 /usr/bin/listener.sh && \

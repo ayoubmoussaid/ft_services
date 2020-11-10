@@ -33,7 +33,7 @@ spec:
             hostPort: 8086
         volumeMounts:
         - name: influxdb-persistent-storage
-          mountPath: /var/lib/mysql
+          mountPath: /var/lib/influxdb/data
       volumes:
       - name: influxdb-persistent-storage
         persistentVolumeClaim:

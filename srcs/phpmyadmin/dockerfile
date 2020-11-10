@@ -23,13 +23,15 @@ RUN apk update && \
     chmod -R 777 /var/www/test/phpmyadmin && \
     ln -s /var/www/test/phpmyadmin  /var/www/localhost/htdocs/phpmyadmin && \
     rc-update add nginx default && \
-    rc-update add php-fpm7 default
+    rc-update add php-fpm7 default && \
+    apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 COPY ./srcs/nginx.conf /etc/nginx/
 COPY ./srcs/config.inc.php /var/www/test/phpmyadmin
 
 COPY ./srcs/startup.sh /bin/
 COPY /srcs/verif.sh /
+COPY ./srcs/telegraf.conf ./etc/
 
 RUN chmod 755 /bin/startup.sh && \
     chmod 777 /verif.sh
