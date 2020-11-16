@@ -1,5 +1,5 @@
 # ft_services
-docker &amp;&amp; kubernetes 
+docker &amp;&amp; kubernetes with minikube 1.14.2
 
 # How To Run
 just execute **setup.sh**, it will run the necessary commands to setup a kubernetes cluster.
