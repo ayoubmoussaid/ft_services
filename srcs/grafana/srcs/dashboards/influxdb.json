@@ -4820,8 +4820,8 @@
           "allFormat": "glob",
           "current": {
             "selected": false,
-            "text": "FTPS",
-            "value": "FTPS"
+            "text": "InfluxDB",
+            "value": "InfluxDB"
           },
           "datasource": "InfluxDB",
           "error": null,
@@ -4841,8 +4841,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "influxdb-78d4b99b4c-s2589",
-            "value": "influxdb-78d4b99b4c-s2589"
+            "text": "influxdb",
+            "value": "influxdb"
           },
           "datasource": "InfluxDB",
           "definition": "",

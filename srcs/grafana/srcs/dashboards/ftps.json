@@ -4841,8 +4841,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "ftps-675c7d78cd-b8q44",
-            "value": "ftps-675c7d78cd-b8q44"
+            "text": "ftps",
+            "value": "ftps"
           },
           "datasource": "FTPS",
           "definition": "",

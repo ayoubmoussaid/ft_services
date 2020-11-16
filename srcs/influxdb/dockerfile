@@ -9,13 +9,6 @@ RUN apk update && \
     rc-service influxdb restart && \
     sleep 3 && \
     influx -execute "CREATE USER \"admin\" WITH PASSWORD 'password' WITH ALL PRIVILEGES" && \
-    influx -username admin -password password -execute "CREATE DATABASE ftpsdb" && \
-    influx -username admin -password password -execute "CREATE DATABASE grafanadb" && \
-    influx -username admin -password password -execute "CREATE DATABASE influxdbdb" && \
-    influx -username admin -password password -execute "CREATE DATABASE mysqldb" && \
-    influx -username admin -password password -execute "CREATE DATABASE nginxdb" && \
-    influx -username admin -password password -execute "CREATE DATABASE phpmyadmindb" && \
-    influx -username admin -password password -execute "CREATE DATABASE wordpressdb" && \
     apk add telegraf --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
  
 COPY ./srcs/startup.sh /bin/

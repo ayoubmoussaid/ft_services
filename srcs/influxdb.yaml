@@ -33,21 +33,21 @@ spec:
             hostPort: 8086
         volumeMounts:
         - name: influxdb-persistent-storage
-          mountPath: /var/lib/influxdb/data
+          mountPath: /var/lib/influxdb/
       volumes:
       - name: influxdb-persistent-storage
         persistentVolumeClaim:
-          claimName: influxdb-pvc
+          claimName: influxdb-pvcy
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: influxdb-pvc
+  name: influxdb-pvcy
   labels:
     app: influxdb
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Gi

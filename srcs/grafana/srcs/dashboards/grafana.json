@@ -4900,8 +4900,8 @@
           "allFormat": "glob",
           "current": {
             "selected": false,
-            "text": "FTPS",
-            "value": "FTPS"
+            "text": "grafana",
+            "value": "grafana"
           },
           "datasource": "GRAFANA",
           "error": null,

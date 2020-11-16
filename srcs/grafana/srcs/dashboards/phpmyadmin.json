@@ -4820,8 +4820,8 @@
           "allFormat": "glob",
           "current": {
             "selected": false,
-            "text": "FTPS",
-            "value": "FTPS"
+            "text": "PHPMYADMIN",
+            "value": "PHPMYADMIN"
           },
           "datasource": "PHPMYADMIN",
           "error": null,
@@ -4841,8 +4841,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "phpmyadmin-59948d77f9-zwhtf",
-            "value": "phpmyadmin-59948d77f9-zwhtf"
+            "text": "phpmyadmin",
+            "value": "phpmyadmin"
           },
           "datasource": "PHPMYADMIN",
           "definition": "",

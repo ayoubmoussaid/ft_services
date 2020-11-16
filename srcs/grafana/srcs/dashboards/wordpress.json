@@ -4950,8 +4950,8 @@
           "allFormat": "glob",
           "current": {
             "selected": false,
-            "text": "FTPS",
-            "value": "FTPS"
+            "text": "WORDPRESS",
+            "value": "WORDPRESS"
           },
           "datasource": "WORDPRESS",
           "error": null,
@@ -4971,8 +4971,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "wordpress-64b86998c5-kmkll",
-            "value": "wordpress-64b86998c5-kmkll"
+            "text": "wordpress",
+            "value": "wordpress"
           },
           "datasource": "WORDPRESS",
           "definition": "",

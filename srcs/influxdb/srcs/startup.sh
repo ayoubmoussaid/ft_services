@@ -2,6 +2,13 @@
 
 openrc default
 
+influx -username admin -password password -execute "CREATE DATABASE ftpsdb"
+influx -username admin -password password -execute "CREATE DATABASE grafanadb"
+influx -username admin -password password -execute "CREATE DATABASE influxdbdb"
+influx -username admin -password password -execute "CREATE DATABASE mysqldb"
+influx -username admin -password password -execute "CREATE DATABASE nginxdb"
+influx -username admin -password password -execute "CREATE DATABASE phpmyadmindb"
+influx -username admin -password password -execute "CREATE DATABASE wordpressdb"
 rc-service influxdb restart
 rc-service telegraf start
 while sleep 60; do

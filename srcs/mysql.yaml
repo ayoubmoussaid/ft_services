@@ -37,12 +37,12 @@ spec:
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
-          claimName: mysql-pvc
+          claimName: mysql-pvcx
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pvc
+  name: mysql-pvcx
   labels:
     app: mysql
 spec:

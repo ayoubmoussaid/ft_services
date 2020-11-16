@@ -4820,8 +4820,8 @@
           "allFormat": "glob",
           "current": {
             "selected": false,
-            "text": "FTPS",
-            "value": "FTPS"
+            "text": "NGINX",
+            "value": "NGINX"
           },
           "datasource": "NGINX",
           "error": null,
@@ -4841,8 +4841,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "nginx-56bf6dd8bf-9x476",
-            "value": "nginx-56bf6dd8bf-9x476"
+            "text": "nginx",
+            "value": "nginx"
           },
           "datasource": "NGINX",
           "definition": "",

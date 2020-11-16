@@ -4820,8 +4820,8 @@
           "allFormat": "glob",
           "current": {
             "selected": false,
-            "text": "FTPS",
-            "value": "FTPS"
+            "text": "MYSQL",
+            "value": "MYSQL"
           },
           "datasource": "MYSQL",
           "error": null,
@@ -4841,8 +4841,8 @@
           "allValue": null,
           "current": {
             "selected": false,
-            "text": "mysql-597c8c6d49-p8t4c",
-            "value": "mysql-597c8c6d49-p8t4c"
+            "text": "mysql",
+            "value": "mysql"
           },
           "datasource": "MYSQL",
           "definition": "",
