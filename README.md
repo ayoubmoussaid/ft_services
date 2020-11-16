@@ -13,3 +13,4 @@ the containers available:
  - grafana on port 3000
  - and an FTPS server on port 21 
  
+ run: `minikube ip` for the ip address to use
