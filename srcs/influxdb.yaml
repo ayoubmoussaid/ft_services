@@ -37,12 +37,12 @@ spec:
       volumes:
       - name: influxdb-persistent-storage
         persistentVolumeClaim:
-          claimName: influxdb-pvcy
+          claimName: influxdb-pvcr
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: influxdb-pvcy
+  name: influxdb-pvcr
   labels:
     app: influxdb
 spec:

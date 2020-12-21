@@ -12,14 +12,15 @@ echo -e "\033[36m
 
 echo -e "\033[92mChanging IP Address in files"
 
+minikube start
+
 IPADDRESS=$(minikube ip)
 
 find ./srcs -type f  | while read line
 do 
-    sed -i '' "s/192.168.99.104/$IPADDRESS/g" $line
+    sed -i '' "s/URLHERE/$IPADDRESS/g" $line
 done
 
-minikube start
 eval $(minikube -p minikube docker-env)
 
 echo -e "\033[92mBuilding Images using Dockerfiles"
